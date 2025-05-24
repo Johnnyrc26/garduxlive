@@ -142,7 +142,8 @@ export const Shows = () => {
                       <div className="text-sm text-gray-400">{show.time}</div>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold">{show.venue}</h3>
+                      <h3 className="text-2xl font-semibold">{show.id}</h3>
+                      <h3 className="text-md font-semibold">{show.venue}</h3>
                       <p className="text-gray-400 flex items-center gap-1">
                         <Icon icon="mdi:map-marker" className="text-sm" />
                         {show.city}, {show.country}
