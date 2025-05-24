@@ -1,8 +1,8 @@
-import{ useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, Button, Spinner } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
-
+import axios from "axios";
 
 interface Show {
   id: string;
@@ -13,45 +13,9 @@ interface Show {
   country: string;
   ticketLink?: string;
   instagramLink?: string;
-  isSoldOut?: boolean;
 }
 
 export const Shows = () => {
-  // Datos de ejemplo por si falla la API
-  const exampleShows: Show[] = [
-    {
-      id: '1',
-      date: '15 Jun',
-      time: '22:00',
-      venue: 'Sala Caracol',
-      city: 'Madrid',
-      country: 'España',
-      ticketLink: 'https://entradas.com/show1',
-      instagramLink: 'https://instagram.com/evento1',
-      isSoldOut: false
-    },
-    {
-      id: '2',
-      date: '22 Jun',
-      time: '21:30',
-      venue: 'Sala Joy Eslava',
-      city: 'Madrid',
-      country: 'España',
-      ticketLink: 'https://entradas.com/show2',
-      isSoldOut: false
-    },
-    {
-      id: '3',
-      date: '30 Jun',
-      time: '23:00',
-      venue: 'Sala Arena',
-      city: 'Barcelona',
-      country: 'España',
-      instagramLink: 'https://instagram.com/evento3',
-      isSoldOut: true
-    }
-  ];
-
   const [shows, setShows] = useState<Show[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -59,52 +23,46 @@ export const Shows = () => {
   useEffect(() => {
     const fetchShows = async () => {
       try {
-        console.log('Iniciando carga de shows...');
-        
-        // Usar datos de ejemplo por ahora
-        console.log('Usando datos de ejemplo');
-        setShows(exampleShows);
-        
-        // Comentado temporalmente hasta que la API esté disponible
-        /*
         console.log('Iniciando petición a la API...');
+        setIsLoading(true);
+
         const response = await axios.get(
           'https://api.sheetbest.com/sheets/f46a27a4-9e01-427c-9987-1dcf5d9dc606',
           {
             headers: {
               'Accept': 'application/json',
-              'Cache-Control': 'no-cache'
-            }
+              'X-Api-Key': import.meta.env.VITE_SHEETBEST_API_KEY || 'CWcmt%jcGvUI6D_ZYU!Q@uXX_r9do$4dHaO1qMAS!lTP@0MM$E8X973_pp3n8p!_',
+            },
           }
         );
-        
-        console.log('Respuesta de la API:', response);
-        
+
+        console.log('Respuesta de la API:', response.data);
+
         if (response.data && Array.isArray(response.data)) {
           const formattedShows = response.data
             .map((show: any, index: number) => ({
-              id: index.toString(),
-              date: show.fecha || '',
-              time: show.hora || '',
+              id: show.id?.toString() || index.toString(),
+              date: show.fecha || show.date || '',
+              time: show.hora || show.time || '',
               venue: show.lugar || show.venue || '',
               city: show.ciudad || show.city || '',
               country: show.pais || show.country || '',
               ticketLink: show.entradas || show.ticketLink || undefined,
               instagramLink: show.instagram || show.instagramLink || undefined,
-              isSoldOut: (show.agotado === 'Sí' || show.isSoldOut === true)
             }))
             .filter((show: Show) => show.venue && show.date);
-            
+
+          if (formattedShows.length === 0) {
+            throw new Error('No se encontraron shows válidos en los datos de la API.');
+          }
+
           setShows(formattedShows);
         } else {
-          console.warn('Formato de respuesta inesperado, usando datos de ejemplo');
-          setShows(exampleShows);
+          throw new Error('Formato de respuesta inesperado de la API.');
         }
-        */
       } catch (err) {
-        console.error('Error al cargar los shows, usando datos de ejemplo:', err);
-        setShows(exampleShows);
-        setError('No se pudieron cargar los shows. Mostrando datos de ejemplo.');
+        console.error('Error al cargar los shows:', err);
+        setError('No se pudieron cargar los shows. Por favor, intenta de nuevo más tarde.');
       } finally {
         setIsLoading(false);
       }
@@ -132,9 +90,9 @@ export const Shows = () => {
             <Icon icon="mdi:alert-circle" className="text-4xl mx-auto" />
           </div>
           <p className="text-lg">{error}</p>
-          <Button 
-            className="mt-4" 
-            color="primary" 
+          <Button
+            className="mt-4"
+            color="primary"
             onClick={() => window.location.reload()}
           >
             Reintentar
@@ -161,16 +119,16 @@ export const Shows = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Próximos Shows
+          Live Dates
           </h2>
           <p className="text-foreground-600 max-w-2xl mx-auto">
-            Vive nuestra fusión única de rock, ritmos caribeños y beats electrónicos en estos próximos eventos.
+          Feel the energy. Live the rhythm. Our fusion of rock, Caribbean vibes, and electronic beats is more than music — it’s an experience.
           </p>
         </div>
 
         <div className="max-w-3xl mx-auto space-y-4">
           {shows.map((show) => (
-            <motion.div 
+            <motion.div
               key={show.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -191,13 +149,9 @@ export const Shows = () => {
                       </p>
                     </div>
                   </div>
-                  
+
                   <div className="flex gap-2 mt-4 sm:mt-0 justify-end">
-                    {show.isSoldOut ? (
-                      <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-red-500/20 text-red-400">
-                        Agotado
-                      </span>
-                    ) : show.ticketLink ? (
+                    {show.ticketLink && (
                       <Button
                         as="a"
                         href={show.ticketLink}
@@ -209,7 +163,7 @@ export const Shows = () => {
                       >
                         Entradas
                       </Button>
-                    ) : null}
+                    )}
                     {show.instagramLink && (
                       <Button
                         as="a"

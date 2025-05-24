@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 const projects = [
   {
     title: "ElectroPicnic",
-    description: "Nuestro primer álbum que marcó el inicio de la revolución sonora de GARDUX. Una mezcla de rock alternativo con toques electrónicos.",
+    description: "Somos el picnic más fiestero de Valencia 🎶🔥 Trae tu manta, tu mejor mood y déjate llevar por los beats, los sabores tropicales y la magia de un picnic que se convierte en fiesta. ¡Música, naturaleza y energía increíble! 🎧🍍🎉",
     image: "/IMG_6366.png",
     year: "2025",
     instagram: "electropicnicfest"
@@ -12,7 +12,7 @@ const projects = [
   {
     title: "Gira Nacional: Fuego y Sombras",
     description: "Recorrimos 15 ciudades llevando nuestra música a más de 50,000 fans. Una experiencia que transformó nuestra visión artística.",
-    image: "https://img.heroui.chat/image/places?w=600&h=400&u=2",
+    image: "Screenshot 2025-05-24 at 15.28.18.png",
     year: "2020",
     instagram: "gardux_tour"
   },
@@ -48,9 +48,6 @@ export const Projects = () => {
                   alt={project.title} 
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                 />
-                <div className="absolute top-3 right-3 bg-black/70 px-3 py-1 rounded-full">
-                  <span className="text-xs font-medium text-white">{project.year}</span>
-                </div>
               </div>
               <CardBody className="p-6">
                 <div className="flex flex-col h-full">
