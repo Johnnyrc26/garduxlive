@@ -13,6 +13,7 @@ interface Show {
   country: string;
   ticketLink?: string;
   instagramLink?: string;
+  name: string;
 }
 
 export const Shows = () => {
@@ -49,6 +50,7 @@ export const Shows = () => {
               country: show.pais || show.country || '',
               ticketLink: show.entradas || show.ticketLink || undefined,
               instagramLink: show.instagram || show.instagramLink || undefined,
+              name: show.nombre || show.name || '',
             }))
             .filter((show: Show) => show.venue && show.date);
 
@@ -142,7 +144,7 @@ export const Shows = () => {
                       <div className="text-sm text-gray-400">{show.time}</div>
                     </div>
                     <div>
-                      <h3 className="text-2xl font-semibold">{show.id}</h3>
+                      <h3 className="text-2xl font-semibold">{show.name}</h3>
                       <h3 className="text-md font-semibold">{show.venue}</h3>
                       <p className="text-gray-400 flex items-center gap-1">
                         <Icon icon="mdi:map-marker" className="text-sm" />
