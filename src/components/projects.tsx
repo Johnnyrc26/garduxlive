@@ -3,25 +3,25 @@ import { Icon } from "@iconify/react";
 
 const projects = [
   {
-    title: "ElectroPicnic",
-    description: "Somos el picnic más fiestero de Valencia 🎶🔥 Trae tu manta, tu mejor mood y déjate llevar por los beats, los sabores tropicales y la magia de un picnic que se convierte en fiesta. ¡Música, naturaleza y energía increíble! 🎧🍍🎉",
+    title: "ElectroPicnic 🍍😎",
+    description: "Somos el picnic más fiestero de Valencia 🎶🔥 Trae tu manta, tu mejor mood y déjate llevar por los beats, los sabores tropicales y la magia de un picnic que se convierte en fiesta. ¡Música, naturaleza y energía increíble! 💚🎉",
     image: "/IMG_6366.png",
     year: "2025",
     instagram: "electropicnicfest"
   },
   {
-    title: "Gira Nacional: Fuego y Sombras",
-    description: "Recorrimos 15 ciudades llevando nuestra música a más de 50,000 fans. Una experiencia que transformó nuestra visión artística.",
+    title: "Vive el Flow del Caribe ✌🏽",
+    description: "Recorrimos 15 ciudades llevando nuestra música a más de 50,000 fans. Una experiencia que transformó nuestra visión artística.⚡️🎸",
     image: "Screenshot 2025-05-24 at 15.28.18.png",
     year: "2020",
-    instagram: "gardux_tour"
+    instagram: "caribbeanflow_events"
   },
   {
-    title: "Colaboración: Voces del Abismo",
-    description: "Proyecto colaborativo con artistas internacionales que fusiona géneros y rompe barreras musicales tradicionales.",
-    image: "https://img.heroui.chat/image/album?w=600&h=400&u=3",
+    title: "Acido Tropical ⚡️😎",
+    description: "Proyecto colaborativo con artistas internacionales que fusiona géneros y rompe barreras musicales tradicionales. 🎧🎛️",
+    image: "https://images.unsplash.com/photo-1625612446042-afd3fe024131?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     year: "2022",
-    instagram: "voces_abismo"
+    instagram: "_acidotropical"
   }
 ];
 

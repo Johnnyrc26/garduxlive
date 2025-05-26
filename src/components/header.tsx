@@ -9,6 +9,7 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
+  Chip,
 } from "@heroui/react";
 import { Icon } from "@iconify/react";
 
@@ -23,8 +24,10 @@ export const Header = () => {
       onMenuOpenChange={setIsMenuOpen}>
       <NavbarBrand>
         <div className="flex items-center gap-2">
-          <Icon icon="lucide:music-4" className="text-primary text-2xl" />
-          <p className="font-bold text-inherit text-xl">FUSION</p>
+          <p className="font-bold text-inherit text-xl">GARDUX</p>
+          <Chip color="primary" variant="flat">
+            <span className="text-primary">LIVE</span>
+          </Chip>
         </div>
       </NavbarBrand>
 
@@ -48,14 +51,17 @@ export const Header = () => {
 
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button
-            color="primary"
-            variant="shadow"
-            radius="full"
-            className="font-medium"
-            endContent={<Icon icon="lucide:music" />}>
-            Listen Now
-          </Button>
+          <a href="https://www.youtube.com/@garduxlive" target="_blank" rel="noopener noreferrer">
+            <Button
+              as="span"
+              color="primary"
+              variant="shadow"
+              radius="full"
+              className="font-medium"
+              endContent={<Icon icon="lucide:music" />}>
+              Listen Now
+            </Button>
+          </a>
         </NavbarItem>
       </NavbarContent>
 

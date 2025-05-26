@@ -23,8 +23,8 @@ export const Hero = () => {
               GARDUX LIVE SESSIONS
             </h1>
             <h3 className="text-foreground-600 text-lg md:text-xl mb-8 max-w-2xl font-bold tracking-tight bg-gradient-to-r from-amber-500 to-pink-500 bg-clip-text text-transparent animate-pulse hover:scale-105 transition-transform duration-300">
-  Music knows no borders.
-</h3>
+              Music knows no borders.
+            </h3>
             <p className="text-foreground-600 text-lg md:text-xl mb-8 max-w-2xl">
               We are a young team that brings upcoming artists from Latin
               America to Europe. Discover unique sounds, unforgettable events,
@@ -36,14 +36,24 @@ export const Hero = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}>
-            <div className="relative w-full aspect-square max-w-md mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-full blur-2xl"></div>
-              <img
-                src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?q=80&w=1000&auto=format&fit=crop"
-                alt="Artist performing"
-                className="relative z-10 rounded-2xl object-cover w-full h-full shadow-xl"
-                loading="lazy"
-              />
+            <div className="relative w-full aspect-auto max-w-2xl mx-auto">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-2xl blur-xl"></div>
+              <div className="relative z-10 overflow-hidden rounded-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1600779547877-be592ef5aad3?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt="Artist performing"
+                  className="w-full h-full object-cover transform transition-all duration-300 hover:scale-105"
+                  style={{
+                    boxShadow: '0 0 25px 15px rgba(0, 0, 0, 0.15)',
+                    filter: 'blur(0.5px)',
+                    WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%)',
+                    maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%)',
+                  }}
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                />
+              </div>
             </div>
           </motion.div>
         </div>
