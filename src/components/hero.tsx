@@ -42,7 +42,7 @@ export const Hero = () => {
                 <img
                   src="https://images.unsplash.com/photo-1600779547877-be592ef5aad3?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt="Artist performing"
-                  className="w-full h-full object-cover transform transition-all duration-300 hover:scale-105"
+                  className="w-full h-full object-cover transform transition-all duration-300"
                   style={{
                     boxShadow: '0 0 25px 15px rgba(0, 0, 0, 0.15)',
                     filter: 'blur(0.5px)',
