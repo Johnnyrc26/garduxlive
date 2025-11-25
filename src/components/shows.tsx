@@ -219,7 +219,7 @@ export const Shows = () => {
   return (
     <section
       id="shows"
-      className="py-20 bg-gradient-to-b from-white to-gray-50">
+      className="py-20 bg-gradient-to-b from-white to-gray-50 overflow-x-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <span className="inline-block px-4 py-1.5 bg-pink-100 text-pink-600 text-sm font-semibold rounded-full mb-4">
@@ -278,14 +278,14 @@ export const Shows = () => {
             {/* Horizontal scroll container */}
             <div
               ref={scrollContainer}
-              className="flex overflow-x-auto pb-6 -mx-4 px-4 scrollbar-hide"
+              className="flex overflow-x-auto pb-6 -mx-4 px-4 scrollbar-hide w-[100vw] relative right-1/2 left-1/2 [margin-right:-50vw] [margin-left:-50vw]"
               style={{
                 scrollBehavior: "smooth",
                 WebkitOverflowScrolling: "touch",
                 scrollSnapType: "x mandatory",
                 scrollPadding: "0 16px",
               }}>
-              <div className="flex space-x-6 min-w-max">
+              <div className="flex space-x-6 min-w-max px-4">
                 {sortedShows.map((show, index) => (
                   <motion.div
                     key={show.id}
