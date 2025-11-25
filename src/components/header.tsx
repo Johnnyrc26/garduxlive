@@ -41,7 +41,7 @@ export const Header = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}>
             <h1 className="text-xl md:text-2xl font-black bg-gradient-to-r from-pink-500 to-blue-600 bg-clip-text text-transparent">
-              GARDUX <span className="text-pink-500">LIVE</span>
+              GARDUX <span className="text-pink-500">LIVE SESSIONS</span>
             </h1>
           </motion.div>
 
