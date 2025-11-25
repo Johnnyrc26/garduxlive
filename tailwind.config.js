@@ -8,14 +8,36 @@ export default {
     "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        gradient: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
+        },
+        "star-movement-bottom": {
+          "0%": { transform: "translate(0%, 0%)", opacity: "1" },
+          "100%": { transform: "translate(-100%, 0%)", opacity: "0" },
+        },
+        "star-movement-top": {
+          "0%": { transform: "translate(0%, 0%)", opacity: "1" },
+          "100%": { transform: "translate(100%, 0%)", opacity: "0" },
+        },
+      },
+      animation: {
+        gradient: "gradient 8s linear infinite",
+        "star-movement-bottom":
+          "star-movement-bottom linear infinite alternate",
+        "star-movement-top": "star-movement-top linear infinite alternate",
+      },
+    },
   },
   darkMode: "class",
   plugins: [
     heroui({
       layout: {
-        dividerWeight: "1px", 
-        disabledOpacity: 0.45, 
+        dividerWeight: "1px",
+        disabledOpacity: 0.45,
         fontSize: {
           tiny: "0.75rem",
           small: "0.875rem",
@@ -23,20 +45,20 @@ export default {
           large: "1.125rem",
         },
         lineHeight: {
-          tiny: "1rem", 
-          small: "1.25rem", 
-          medium: "1.5rem", 
-          large: "1.75rem", 
+          tiny: "1rem",
+          small: "1.25rem",
+          medium: "1.5rem",
+          large: "1.75rem",
         },
         radius: {
-          small: "6px", 
-          medium: "8px", 
-          large: "12px", 
+          small: "6px",
+          medium: "8px",
+          large: "12px",
         },
         borderWidth: {
-          small: "1px", 
-          medium: "1px", 
-          large: "2px", 
+          small: "1px",
+          medium: "1px",
+          large: "2px",
         },
       },
       themes: {
@@ -56,7 +78,7 @@ export default {
               800: "#004e66",
               900: "#002733",
               DEFAULT: "#00c3ff",
-              foreground: "#000000"
+              foreground: "#000000",
             },
             secondary: {
               50: "#fff2e6",
@@ -70,27 +92,27 @@ export default {
               800: "#663300",
               900: "#331900",
               DEFAULT: "#ff8000",
-              foreground: "#000000"
+              foreground: "#000000",
             },
             content1: {
               DEFAULT: "#18181b",
-              foreground: "#ffffff"
+              foreground: "#ffffff",
             },
             content2: {
               DEFAULT: "#27272a",
-              foreground: "#ffffff"
+              foreground: "#ffffff",
             },
             content3: {
               DEFAULT: "#3f3f46",
-              foreground: "#ffffff"
+              foreground: "#ffffff",
             },
             content4: {
               DEFAULT: "#52525b",
-              foreground: "#ffffff"
+              foreground: "#ffffff",
             },
-          }
-        }
-      }
-    })
-  ]
-}
+          },
+        },
+      },
+    }),
+  ],
+};
