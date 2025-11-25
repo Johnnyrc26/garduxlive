@@ -25,11 +25,11 @@ const sampleShows: Show[] = [
     venue: "Bourbon St.",
     city: "Barranquilla",
     country: "Colombia",
-    ticketLink: "https://www.pasaline.com/event/kraken-barranquilla-2025",
+    ticketLink: "",
     instagramLink:
       "https://www.instagram.com/krakentitanoficial?igsh=MXQ3NnI5N2loZWNnaw==",
     imageUrl:
-      "https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=1470&q=80",
+      "kraken.jpeg",
   },
   {
     id: "2",
@@ -40,11 +40,11 @@ const sampleShows: Show[] = [
     city: "Barranquilla",
     country: "Colombia",
     ticketLink:
-      "https://www.passline.com/sitio-evento/el-caribefunk-en-barranquilla-6-de-ene",
+      "",
     instagramLink:
       "https://www.instagram.com/caribefunk?igsh=MW1iazBnZmpjdXVobg==",
     imageUrl:
-      "https://images.unsplash.com/photo-1461784180009-060310c220eb?auto=format&fit=crop&w=1470&q=80",
+      "caribe.jpeg",
   },
   {
     id: "3",
@@ -59,7 +59,7 @@ const sampleShows: Show[] = [
       "https://www.instagram.com/theapartment.vlc?igsh=OTFwMnN3N3l4bnV6",
     description: "Cada Jueves - 19 horas | Entrada Free",
     imageUrl:
-      "https://images.unsplash.com/photo-1514525253161-4a46d19cd819?auto=format&fit=crop&w=1470&q=80",
+      "gardux.jpeg",
   },
   {
     id: "4",
@@ -74,7 +74,7 @@ const sampleShows: Show[] = [
       "https://www.instagram.com/electropicnicfest?igsh=MWdrdml1c2U1cmxjYQ==",
     description: "Domingo (cada 15) - 12PM | Entrada Free",
     imageUrl:
-      "https://images.unsplash.com/photo-1540039155733-5bd30b56a234?auto=format&fit=crop&w=1374&q=80",
+      "electropicnic.jpeg",
   },
 ];
 

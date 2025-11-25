@@ -6,6 +6,7 @@ import { Trayectoria } from "./components/trayectoria";
 import { Artistas } from "./components/artistas";
 import { Contact } from "./components/contact";
 import { Footer } from "./components/footer";
+import FlyersSection from "./components/FlyersSection";
 
 export default function App() {
   // Prevenir scroll horizontal en móviles
@@ -24,8 +25,9 @@ export default function App() {
       <Header />
       <main>
         <Hero />
-        <Shows />
         <Trayectoria />
+        <FlyersSection />
+        <Shows />
         <Artistas />
         <Contact />
       </main>
