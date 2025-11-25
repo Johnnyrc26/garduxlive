@@ -28,8 +28,7 @@ const sampleShows: Show[] = [
     ticketLink: "",
     instagramLink:
       "https://www.instagram.com/krakentitanoficial?igsh=MXQ3NnI5N2loZWNnaw==",
-    imageUrl:
-      "kraken.jpeg",
+    imageUrl: "kraken.jpeg",
   },
   {
     id: "2",
@@ -39,17 +38,15 @@ const sampleShows: Show[] = [
     venue: "Moy's",
     city: "Barranquilla",
     country: "Colombia",
-    ticketLink:
-      "",
+    ticketLink: "",
     instagramLink:
       "https://www.instagram.com/caribefunk?igsh=MW1iazBnZmpjdXVobg==",
-    imageUrl:
-      "caribe.jpeg",
+    imageUrl: "caribe.jpeg",
   },
   {
     id: "3",
     name: "JUEVES DE OPEN DECK",
-    date: "2025-11-27",
+    date: "Todos los jueves",
     time: "19:00",
     venue: "The Apartment",
     city: "Valencia",
@@ -58,13 +55,12 @@ const sampleShows: Show[] = [
     instagramLink:
       "https://www.instagram.com/theapartment.vlc?igsh=OTFwMnN3N3l4bnV6",
     description: "Cada Jueves - 19 horas | Entrada Free",
-    imageUrl:
-      "gardux.jpeg",
+    imageUrl: "gardux.jpeg",
   },
   {
     id: "4",
     name: "ELECTROPICNIC FEST 🍍",
-    date: "2025-12-15",
+    date: "Los domingos (cada 15 días)",
     time: "12:00",
     venue: "Río Turia",
     city: "Valencia",
@@ -73,8 +69,7 @@ const sampleShows: Show[] = [
     instagramLink:
       "https://www.instagram.com/electropicnicfest?igsh=MWdrdml1c2U1cmxjYQ==",
     description: "Domingo (cada 15) - 12PM | Entrada Free",
-    imageUrl:
-      "electropicnic.jpeg",
+    imageUrl: "electropicnic.jpeg",
   },
 ];
 
@@ -83,19 +78,28 @@ export const Shows = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollContainer = useRef<HTMLDivElement>(null);
 
+  // Get sort weight for date (puts recurring events after specific dates)
+  const getDateWeight = (dateString: string): number => {
+    if (dateString.startsWith("Todos los") || dateString.startsWith("Los")) {
+      // Recurring events go to the end
+      return Number.MAX_SAFE_INTEGER;
+    }
+    // Specific dates are sorted chronologically
+    return new Date(dateString).getTime();
+  };
+
   // Filter shows by city
   const filteredShows =
     selectedCity === "all"
       ? sampleShows
       : sampleShows.filter((show) => show.city === selectedCity);
 
-  // Sort shows by date
-  const sortedShows = [...filteredShows].sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-  );
+  // Sort shows by date, with specific dates first (chronological) and recurring events last
+  const sortedShows = [...filteredShows].sort((a, b) => {
+    return getDateWeight(a.date) - getDateWeight(b.date);
+  });
 
   // Scroll functions
-
 
   const scrollToIndex = (index: number) => {
     if (scrollContainer.current) {
@@ -140,15 +144,25 @@ export const Shows = () => {
     return () => container.removeEventListener("scroll", handleScroll);
   }, [filteredShows]);
 
-  // Format date
+  // Format date - handles both specific dates and recurring events
   const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
-    return new Date(dateString).toLocaleDateString("es-ES", options);
+    // Check if it's a recurring event
+    if (dateString.startsWith("Todos los") || dateString.startsWith("Los")) {
+      return dateString; // Return as is for recurring events
+    }
+
+    // Handle specific dates
+    try {
+      const options: Intl.DateTimeFormatOptions = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      };
+      return new Date(dateString).toLocaleDateString("es-ES", options);
+    } catch (e) {
+      return dateString; // Fallback to original string if not a valid date
+    }
   };
 
   // Get unique cities for filter
@@ -202,7 +216,6 @@ export const Shows = () => {
 
         {sortedShows.length > 0 ? (
           <div className="relative">
-
             {/* Horizontal scroll container */}
             <div
               ref={scrollContainer}

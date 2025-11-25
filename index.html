@@ -1,40 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
+    <!-- Basic Meta Tags -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gardux Live Sessions - Music Artist and Live Act</title>
-    <meta name="description" content="Discover Gardux Live Sessions, a music artist bridging Latin America and Europe with vibrant live acts. Book through Caribe Funk or Muerdo Musica, and explore events like Caribbean Flow and Electropicnic Fest." />
-    <meta name="keywords" content="Gardux Live Sessions, music artist, live act, Latin American music, European music, Caribe Funk, Muerdo Musica, Caribbean Flow Events, Electropicnic Fest, tropical music" />
+    <meta name="description" content="Gardux Live Sessions - Experiencias musicales únicas que fusionan electrónica y sonidos urbanos. Descubre nuestras sesiones en directo, eventos y más." />
+    <meta name="keywords" content="Gardux, música electrónica, sesiones en vivo, eventos musicales, DJ, música urbana, conciertos, fiestas electrónicas" />
     <meta name="author" content="Gardux Live Sessions" />
+    <meta name="robots" content="index, follow" />
     
     <!-- Open Graph / Facebook Meta Tags -->
-    <meta property="og:title" content="Gardux Live Sessions - Music Artist Bridging Latin America and Europe" />
-    <meta property="og:description" content="Experience the vibrant live performances of Gardux Live Sessions, connecting Latin American and European music scenes. Book via Caribe Funk or Muerdo Musica." />
-    <meta property="og:image" content="https://www.example.com/images/gardux-live.jpg" />
-    <meta property="og:url" content="https://www.example.com" />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://garduxlive.com/" />
+    <meta property="og:title" content="Gardux Live Sessions | Música Electrónica y Experiencias en Vivo" />
+    <meta property="og:description" content="Vive la experiencia Gardux con nuestras sesiones en directo, eventos exclusivos y la mejor música electrónica. ¡Conecta con nosotros!" />
+    <meta property="og:image" content="https://garduxlive.com/images/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_ES" />
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Gardux Live Sessions - Music Artist and Live Act" />
-    <meta name="twitter:description" content="Join Gardux Live Sessions for electrifying performances blending Latin American and European music. Connect with Caribe Funk and Muerdo Musica." />
-    <meta name="twitter:image" content="https://www.example.com/images/gardux-live.jpg" />
-    <meta name="twitter:site" content="@_acidotropical" />
+    <meta name="twitter:url" content="https://garduxlive.com/" />
+    <meta name="twitter:title" content="Gardux Live Sessions | Música Electrónica y Experiencias en Vivo" />
+    <meta name="twitter:description" content="Descubre las sesiones en vivo y eventos exclusivos de Gardux. La mejor música electrónica en un solo lugar." />
+    <meta name="twitter:image" content="https://garduxlive.com/images/twitter-card.jpg" />
+    <meta name="twitter:site" content="@garduxlive" />
+    <meta name="twitter:creator" content="@garduxlive" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/Gardux.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#000000" />
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://www.example.com" />
+    <link rel="canonical" href="https://garduxlive.com/" />
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/src/main.css" as="style" />
+    <link rel="preload" href="/src/main.tsx" as="script" />
+
+    <!-- Structured Data / Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicGroup",
+      "name": "Gardux Live Sessions",
+      "url": "https://garduxlive.com",
+      "description": "Gardux Live Sessions - Experiencias musicales únicas que fusionan electrónica y sonidos urbanos.",
+      "image": "https://garduxlive.com/images/logo.jpg",
+      "sameAs": [
+        "https://www.instagram.com/garduxlive/",
+        "https://soundcloud.com/gardux",
+        "https://www.facebook.com/garduxlive"
+      ],
+      "genre": ["Electronic", "House", "Techno", "Urban"],
+      "foundingDate": "2020",
+      "email": "contacto@garduxlive.com",
+      "founder": {
+        "@type": "Person",
+        "name": "Gardux"
+      }
+    }
+    </script>
+
+    <title>Gardux Live Sessions | Música Electrónica y Experiencias en Vivo</title>
   </head>
   <body class="h-full min-h-screen">
     <!-- Main Content -->
-    <main id="root" aria-label="Gardux Live Music and Chat Application"></main>
+    <main id="root" aria-label="Aplicación de Música y Chat de Gardux Live">
+      <!-- Fallback content for non-JS users -->
+      <noscript>
+        <div style="text-align: center; padding: 2rem;">
+          <h1>Bienvenido a Gardux Live Sessions</h1>
+          <p>Para disfrutar de la experiencia completa, por favor activa JavaScript en tu navegador.</p>
+        </div>
+      </noscript>
+    </main>
 
     <!-- Scripts -->
     <script type="module" src="/src/main.tsx"></script>
-    <script src="https://cdn.jsdelivr.net/npm/heroui-chat-script@0/dist/index.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/heroui-chat-script@beta/dist/select-and-edit-utils.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/heroui-chat-script@0/dist/index.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/heroui-chat-script@beta/dist/select-and-edit-utils.global.js" defer></script>
   </body>
 </html>
