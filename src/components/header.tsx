@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Icon } from "@iconify/react";
+import { Button } from "@heroui/react";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,7 +34,7 @@ export const Header = () => {
           : "bg-transparent py-4 md:py-6"
       }`}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between relative">
           {/* Logo */}
           <motion.div
             className="flex items-center gap-2"
@@ -45,8 +46,8 @@ export const Header = () => {
             </h1>
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation - Centered */}
+          <nav className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
             {navItems.map((item, index) => (
               <motion.a
                 key={item.name}
@@ -78,17 +79,18 @@ export const Header = () => {
 
           {/* CTA Button */}
           <motion.div
-            className="hidden md:block"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}>
-            <a
+            <Button
+              as="a"
               href="https://www.youtube.com/@garduxlive"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-2.5 bg-gradient-to-r from-pink-500 to-blue-500 text-white font-bold rounded-full hover:opacity-90 transition-all transform hover:scale-105 shadow-lg hover:shadow-pink-200">
+              variant="bordered"
+              className="hidden md:flex items-center gap-2 px-6 py-2.5 text-sm font-normal tracking-wide rounded-full border-1.5 border-white/20 hover:border-white/40 bg-gradient-to-r from-pink-500/90 to-blue-500/90 text-white/95 hover:scale-[1.02] transition-all duration-300 backdrop-blur-sm">
               Ver Sesiones
-            </a>
+            </Button>
           </motion.div>
         </div>
       </div>
@@ -107,24 +109,41 @@ export const Header = () => {
             exit={{ opacity: 0, height: 0, overflow: "hidden" }}
             transition={{ duration: 0.2, ease: "easeInOut" }}>
             <div className="container mx-auto px-4 py-2">
-              <nav className="flex flex-col space-y-1">
+              <nav className="flex flex-col space-y-2 p-2">
                 {navItems.map((item) => (
-                  <a
+                  <Button
                     key={item.name}
+                    as="a"
                     href={item.href}
-                    className="text-base text-gray-700 hover:text-pink-500 px-3 py-2.5 rounded-lg hover:bg-gray-50 transition-colors active:bg-gray-100"
+                    variant="light"
+                    fullWidth
+                    className="justify-start text-gray-700 hover:bg-gray-50 active:bg-gray-100"
                     onClick={() => setIsMenuOpen(false)}>
-                    {item.name}
-                  </a>
+                    {item.name === "Instagram" ? (
+                      <a
+                        href="https://www.instagram.com/garduxlive/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full h-full flex items-center"
+                        onClick={(e) => e.stopPropagation()}>
+                        {item.name}
+                      </a>
+                    ) : (
+                      item.name
+                    )}
+                  </Button>
                 ))}
-                <a
+                <Button
+                  as="a"
                   href="https://www.youtube.com/@garduxlive"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="my-2 px-4 py-2 text-center bg-gradient-to-r from-pink-500 to-blue-500 text-white font-bold rounded-lg hover:opacity-90 active:opacity-80 transition-all text-sm"
-                  onClick={() => setIsMenuOpen(false)}>
+                  variant="bordered"
+                  fullWidth
+                  className="mt-4 border-1.5 border-white/20 hover:border-white/40 bg-gradient-to-r from-pink-500/90 to-blue-500/90 text-white/95 hover:scale-[1.02] transition-all duration-300 backdrop-blur-sm"
+                  onPress={() => setIsMenuOpen(false)}>
                   Ver Sesiones en YouTube
-                </a>
+                </Button>
               </nav>
             </div>
           </motion.div>

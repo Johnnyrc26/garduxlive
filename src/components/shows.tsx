@@ -13,112 +13,68 @@ interface Show {
   instagramLink?: string;
   name: string;
   imageUrl?: string;
+  description?: string;
 }
 
 const sampleShows: Show[] = [
   {
     id: "1",
-    name: "Noche Tropical Vol. 6",
-    date: "2024-12-15",
+    name: "KRAKEN – Ruge la leyenda del titán",
+    date: "2025-12-20",
     time: "22:00",
-    venue: "Sala Razzmatazz",
-    city: "Barcelona",
-    country: "España",
-    ticketLink: "#",
-    instagramLink: "https://instagram.com/razzmatazzbcn",
+    venue: "Bourbon St.",
+    city: "Barranquilla",
+    country: "Colombia",
+    ticketLink: "https://www.pasaline.com/event/kraken-barranquilla-2025",
+    instagramLink:
+      "https://www.instagram.com/krakentitanoficial?igsh=MXQ3NnI5N2loZWNnaw==",
     imageUrl:
-      "https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+      "https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=1470&q=80",
   },
   {
     id: "2",
-    name: "Sonidos del Caribe Festival",
-    date: "2024-11-20",
-    time: "21:30",
-    venue: "Sala Caracol",
-    city: "Madrid",
-    country: "España",
-    ticketLink: "#",
-    instagramLink: "https://instagram.com/salacaracol",
+    name: "El CARIBEFUNK Tour 2026",
+    date: "2026-01-06",
+    time: "20:00",
+    venue: "Moy's",
+    city: "Barranquilla",
+    country: "Colombia",
+    ticketLink:
+      "https://www.passline.com/sitio-evento/el-caribefunk-en-barranquilla-6-de-ene",
+    instagramLink:
+      "https://www.instagram.com/caribefunk?igsh=MW1iazBnZmpjdXVobg==",
     imageUrl:
-      "https://images.unsplash.com/photo-1461784180009-060310c220eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+      "https://images.unsplash.com/photo-1461784180009-060310c220eb?auto=format&fit=crop&w=1470&q=80",
   },
   {
     id: "3",
-    name: "Fiesta Latina Especial Verano",
-    date: "2024-12-12",
-    time: "23:00",
-    venue: "Playa de la Malvarrosa",
+    name: "JUEVES DE OPEN DECK",
+    date: "2025-11-27",
+    time: "19:00",
+    venue: "The Apartment",
     city: "Valencia",
     country: "España",
-    ticketLink: "#",
-    instagramLink: "https://instagram.com/playamalvarrosa",
+    ticketLink: undefined,
+    instagramLink:
+      "https://www.instagram.com/theapartment.vlc?igsh=OTFwMnN3N3l4bnV6",
+    description: "Cada Jueves - 19 horas | Entrada Free",
     imageUrl:
-      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+      "https://images.unsplash.com/photo-1514525253161-4a46d19cd819?auto=format&fit=crop&w=1470&q=80",
   },
   {
     id: "4",
-    name: "Ritmo Caribeño Noche Blanca",
-    date: "2024-11-21",
-    time: "20:00",
-    venue: "Parque del Retiro",
-    city: "Madrid",
+    name: "ELECTROPICNIC FEST 🍍",
+    date: "2025-12-15",
+    time: "12:00",
+    venue: "Río Turia",
+    city: "Valencia",
     country: "España",
-    ticketLink: "#",
-    instagramLink: "https://instagram.com/parquedelretiro",
+    ticketLink: undefined,
+    instagramLink:
+      "https://www.instagram.com/electropicnicfest?igsh=MWdrdml1c2U1cmxjYQ==",
+    description: "Domingo (cada 15) - 12PM | Entrada Free",
     imageUrl:
-      "https://images.unsplash.com/photo-1505373876331-ff89ba064aaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
-  },
-  {
-    id: "5",
-    name: "Sábado de Rumba",
-    date: "2024-11-23",
-    time: "19:30",
-    venue: "Sala Clamores",
-    city: "Madrid",
-    country: "España",
-    ticketLink: "#",
-    instagramLink: "https://instagram.com/salaclamores",
-    imageUrl:
-      "https://images.unsplash.com/photo-1540039155733-5bd30b56a234?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80",
-  },
-  {
-    id: "6",
-    name: "Gira Latinoamericana 2024",
-    date: "2024-12-15",
-    time: "21:00",
-    venue: "Teatro Colón",
-    city: "Buenos Aires",
-    country: "Argentina",
-    ticketLink: "#",
-    instagramLink: "https://instagram.com/teatrocolon",
-    imageUrl:
-      "https://images.unsplash.com/photo-1540039155733-5bd30b56a234?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80",
-  },
-  {
-    id: "7",
-    name: "Feria de Abril",
-    date: "2024-11-25",
-    time: "22:30",
-    venue: "Real de la Feria",
-    city: "Sevilla",
-    country: "España",
-    ticketLink: "#",
-    instagramLink: "https://instagram.com/feriadesevilla",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
-  },
-  {
-    id: "8",
-    name: "Festival Internacional de Música",
-    date: "2024-12-05",
-    time: "20:00",
-    venue: "Auditorio de Tenerife",
-    city: "Santa Cruz de Tenerife",
-    country: "España",
-    ticketLink: "#",
-    instagramLink: "https://instagram.com/auditoriodetenerife",
-    imageUrl:
-      "https://images.unsplash.com/photo-1540039155733-5bd30b56a234?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80",
+      "https://images.unsplash.com/photo-1540039155733-5bd30b56a234?auto=format&fit=crop&w=1374&q=80",
   },
 ];
 
@@ -139,25 +95,7 @@ export const Shows = () => {
   );
 
   // Scroll functions
-  const scrollLeft = () => {
-    if (scrollContainer.current) {
-      scrollContainer.current.scrollBy({
-        left: -300,
-        behavior: "smooth",
-      });
-      setCurrentIndex((prev) => Math.max(0, prev - 1));
-    }
-  };
 
-  const scrollRight = () => {
-    if (scrollContainer.current) {
-      scrollContainer.current.scrollBy({
-        left: 300,
-        behavior: "smooth",
-      });
-      setCurrentIndex((prev) => Math.min(filteredShows.length - 1, prev + 1));
-    }
-  };
 
   const scrollToIndex = (index: number) => {
     if (scrollContainer.current) {
@@ -219,7 +157,7 @@ export const Shows = () => {
   return (
     <section
       id="shows"
-      className="py-20 bg-gradient-to-b from-white to-gray-50 overflow-x-hidden">
+      className="py-20 bg-gradient-to-b from-white to-gray-50 overflow-x-hidden overflow-visible">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <span className="inline-block px-4 py-1.5 bg-pink-100 text-pink-600 text-sm font-semibold rounded-full mb-4">
@@ -264,28 +202,18 @@ export const Shows = () => {
 
         {sortedShows.length > 0 ? (
           <div className="relative">
-            {/* Left navigation button */}
-            <button
-              onClick={scrollLeft}
-              className="hidden md:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 w-10 h-10 bg-white rounded-full shadow-lg z-10 hover:bg-gray-50 transition-colors"
-              aria-label="Desplazar izquierda">
-              <Icon
-                icon="mdi:chevron-left"
-                className="text-2xl text-gray-700"
-              />
-            </button>
 
             {/* Horizontal scroll container */}
             <div
               ref={scrollContainer}
-              className="flex overflow-x-auto pb-6 -mx-4 px-4 scrollbar-hide w-[100vw] relative right-1/2 left-1/2 [margin-right:-50vw] [margin-left:-50vw]"
+              className="flex overflow-x-auto pb-6 mx-auto max-w-full px-16 md:px-20 scrollbar-hide w-full relative"
               style={{
                 scrollBehavior: "smooth",
                 WebkitOverflowScrolling: "touch",
                 scrollSnapType: "x mandatory",
                 scrollPadding: "0 16px",
               }}>
-              <div className="flex space-x-6 min-w-max px-4">
+              <div className="flex space-x-6 min-w-max px-4 relative z-10">
                 {sortedShows.map((show, index) => (
                   <motion.div
                     key={show.id}
@@ -339,8 +267,9 @@ export const Shows = () => {
                                 href={show.ticketLink}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex-1 bg-gradient-to-r from-pink-500 to-blue-500 hover:from-pink-600 hover:to-blue-600 text-white text-center py-2 px-4 rounded-lg font-medium transition-all duration-300 hover:shadow-lg whitespace-nowrap">
-                                Comprar Entradas
+                                className="flex items-center space-x-2 flex-1 bg-gray-100 text-gray-700 text-center py-2 px-4 rounded-lg font-medium transition-transform duration-300 hover:bg-gray-200 hover:scale-105 whitespace-nowrap">
+                                <Icon icon="mdi:ticket" className="text-lg" />
+                                <span>Comprar Entradas</span>
                               </a>
                             )}
                             {show.instagramLink && (
@@ -364,17 +293,6 @@ export const Shows = () => {
                 ))}
               </div>
             </div>
-
-            {/* Right navigation button */}
-            <button
-              onClick={scrollRight}
-              className="hidden md:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 w-10 h-10 bg-white rounded-full shadow-lg z-10 hover:bg-gray-50 transition-colors"
-              aria-label="Desplazar derecha">
-              <Icon
-                icon="mdi:chevron-right"
-                className="text-2xl text-gray-700"
-              />
-            </button>
 
             {/* Mobile navigation dots */}
             <div className="flex justify-center mt-6 space-x-2 md:hidden">

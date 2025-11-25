@@ -1,89 +1,103 @@
 import { motion } from "framer-motion";
+import { Button } from "@heroui/react";
 
 export const Hero = () => {
   return (
     <section className="relative min-h-screen overflow-hidden pt-16 md:pt-0">
-      {/* Full-Screen Background Image with Gradient Overlay */}
+      {/* Full-Screen Background Image + Tropical Pastel Overlay */}
       <div className="absolute inset-0 -z-10">
         <img
-          src="https://images.unsplash.com/photo-1600779547877-be592ef5aad3?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src="https://images.unsplash.com/photo-1600779547877-be592ef5aad3?q=80&w=2000&auto=format&fit=crop"
           alt="Gardux Live Sessions"
           className="w-full h-full object-cover object-center"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-pink-100/80 via-blue-50/70 to-yellow-50/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-pink-100/70 via-teal-50/70 to-amber-100/80"></div>
       </div>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 h-screen flex flex-col justify-center pt-16 md:pt-0">
+      {/* CONTAINER */}
+      <div className="container mx-auto px-4 min-h-screen flex flex-col justify-center py-20 md:py-24">
         <motion.div
           className="max-w-5xl mx-auto text-center px-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}>
-          {/* Main Title with Tropical Accent */}
+          {/* TITLE */}
           <motion.h1
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black mb-2 leading-tight tracking-tight"
+            className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black mb-2 tracking-tight leading-none"
             style={{
               background:
-                "linear-gradient(45deg, #1a365d, #2c5282, #4c51bf, #9f7aea, #f687b3)",
+                "linear-gradient(45deg, #F59E0B, #EC4899, #06B6D4, #A78BFA)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
             }}>
-            <span className="block sm:inline">GARDUX</span>{" "}
-            <span className="text-pink-400">LIVE SESSIONS</span>
+            GARDUX LIVE SESSIONS
           </motion.h1>
 
-          <motion.div
+          {/* SUBTITLE */}
+          <motion.h2
+            className="text-xl sm:text-2xl md:text-3xl font-bold mb-6
+            bg-gradient-to-r from-pink-500 to-teal-600 bg-clip-text text-transparent"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 1 }}>
-            {/* Tagline with Organic Feel */}
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-4 sm:mb-6 tracking-wide px-2">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-600">
-                Música • Cultura • Conexiones
-              </span>
-            </h2>
+            transition={{ delay: 0.2, duration: 1 }}>
+            Música que viaja. Culturas que se encuentran.
+          </motion.h2>
 
-            {/* Decorative Element */}
-            <div className="w-32 h-1 bg-gradient-to-r from-pink-400 to-blue-400 mx-auto mb-8 rounded-full"></div>
+          {/* DECORATIVE LINE */}
+          <div className="w-40 h-1 bg-gradient-to-r from-pink-400 to-teal-400 mx-auto mb-8 rounded-full" />
 
-            {/* Description */}
-            <p className="text-base sm:text-lg md:text-xl text-gray-700 mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed font-medium px-2">
-              Conectando artistas emergentes de Latinoamérica con audiencias
-              globales a través de experiencias musicales únicas y giras
-              internacionales.
-            </p>
-          </motion.div>
+          {/* DESCRIPTION */}
+          <motion.p
+            className="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-10 leading-relaxed font-medium"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 1 }}>
+            Gardux Live Sessions es una plataforma creativa que une electrónica
+            híbrida, giras internacionales, sesiones audiovisuales y
+            experiencias urbanas en movimiento. Desde el show{" "}
+            <span className="font-semibold text-pink-600">Ácido Tropical</span>,
+            hasta tours entre Latinoamérica y Europa, pasando por grabaciones en
+            escenarios naturales y{" "}
+            <span className="font-semibold text-teal-600">Voltafon</span>, la
+            fiesta sobre ruedas que hace vibrar Valencia.
+          </motion.p>
 
-          {/* Action Buttons */}
+          {/* CTA BUTTONS */}
           <motion.div
-            className="flex flex-wrap justify-center gap-4 sm:gap-6 px-2"
+            className="flex flex-wrap justify-center gap-4 sm:gap-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}>
-            <button className="px-6 py-3 sm:px-8 sm:py-4 bg-pink-500 hover:bg-pink-600 text-white text-sm sm:text-base font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-pink-200 whitespace-nowrap">
-              Descubre Ácido Tropical
-            </button>
-            <button className="px-6 py-3 sm:px-8 sm:py-4 bg-white/90 hover:bg-white text-gray-800 text-sm sm:text-base border-2 border-gray-800 hover:border-pink-500 font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-pink-100 whitespace-nowrap">
-              Ver Sesiones en Vivo
-            </button>
+            <Button
+              as="a"
+              href="https://www.instagram.com/garduxlive/"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="bordered"
+              className="px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-medium rounded-full border-1.5 border-white/20 hover:border-white/40 bg-gradient-to-r from-pink-500/90 to-pink-600/90 text-white/95 hover:scale-[1.02] transition-all duration-300 backdrop-blur-sm">
+              Instagram
+            </Button>
+
+            <Button
+              variant="bordered"
+              className="px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-medium rounded-full border-1.5 border-gray-900/20 hover:border-teal-500/40 bg-white/90 hover:bg-white/95 text-gray-800 hover:scale-[1.02] transition-all duration-300 backdrop-blur-sm">
+              Explora Las Sesiones
+            </Button>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* SCROLL INDICATOR */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}>
         <svg
           className="w-8 h-8 text-pink-500"
           fill="none"
           stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg">
+          viewBox="0 0 24 24">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
