@@ -1,9 +1,10 @@
 import { Header } from "./components/header";
 import { Hero } from "./components/hero";
 import { Shows } from "./components/shows";
+import { Trayectoria } from "./components/trayectoria";
+import { Artistas } from "./components/artistas";
 import { Contact } from "./components/contact";
 import { Footer } from "./components/footer";
-import { Projects } from "./components/projects";
 
 export default function App() {
   return (
@@ -12,7 +13,8 @@ export default function App() {
       <main>
         <Hero />
         <Shows />
-        <Projects />
+        <Trayectoria />
+        <Artistas />
         <Contact />
       </main>
       <Footer />

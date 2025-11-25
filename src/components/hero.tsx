@@ -2,62 +2,96 @@ import { motion } from "framer-motion";
 
 export const Hero = () => {
   return (
-    <section
-      id="home"
-      className="relative overflow-hidden pt-16 md:pt-24 pb-20 md:pb-32">
-      {/* Background elements */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-1/3 left-1/4 w-64 h-64 rounded-full bg-primary/20 blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/3 w-80 h-80 rounded-full bg-secondary/20 blur-3xl"></div>
-        <div className="absolute top-1/2 right-1/4 w-40 h-40 rounded-full bg-warning/20 blur-3xl"></div>
+    <section className="relative min-h-screen overflow-hidden pt-16 md:pt-0">
+      {/* Full-Screen Background Image with Gradient Overlay */}
+      <div className="absolute inset-0 -z-10">
+        <img
+          src="https://images.unsplash.com/photo-1600779547877-be592ef5aad3?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Gardux Live Sessions"
+          className="w-full h-full object-cover object-center"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-pink-100/80 via-blue-50/70 to-yellow-50/90"></div>
       </div>
 
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center gap-12">
+      {/* Main Content */}
+      <div className="container mx-auto px-4 h-screen flex flex-col justify-center pt-16 md:pt-0">
+        <motion.div
+          className="max-w-5xl mx-auto text-center px-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}>
+          {/* Main Title with Tropical Accent */}
+          <motion.h1
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black mb-2 leading-tight tracking-tight"
+            style={{
+              background:
+                "linear-gradient(45deg, #1a365d, #2c5282, #4c51bf, #9f7aea, #f687b3)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
+            }}>
+            <span className="block sm:inline">GARDUX</span>{" "}
+            <span className="text-pink-400">LIVE SESSIONS</span>
+          </motion.h1>
+
           <motion.div
-            className="flex-1"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}>
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              GARDUX LIVE SESSIONS
-            </h1>
-            <h3 className="text-foreground-600 text-lg md:text-xl mb-8 max-w-2xl font-bold tracking-tight bg-gradient-to-r from-amber-500 to-pink-500 bg-clip-text text-transparent animate-pulse hover:scale-105 transition-transform duration-300">
-              Music knows no borders.
-            </h3>
-            <p className="text-foreground-600 text-lg md:text-xl mb-8 max-w-2xl">
-              We are a young team that brings upcoming artists from Latin
-              America to Europe. Discover unique sounds, unforgettable events,
-              and a network connecting artists, cultures, and audiences.
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 1 }}>
+            {/* Tagline with Organic Feel */}
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-4 sm:mb-6 tracking-wide px-2">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-600">
+                Música • Cultura • Conexiones
+              </span>
+            </h2>
+
+            {/* Decorative Element */}
+            <div className="w-32 h-1 bg-gradient-to-r from-pink-400 to-blue-400 mx-auto mb-8 rounded-full"></div>
+
+            {/* Description */}
+            <p className="text-base sm:text-lg md:text-xl text-gray-700 mb-8 sm:mb-10 max-w-3xl mx-auto leading-relaxed font-medium px-2">
+              Conectando artistas emergentes de Latinoamérica con audiencias
+              globales a través de experiencias musicales únicas y giras
+              internacionales.
             </p>
           </motion.div>
+
+          {/* Action Buttons */}
           <motion.div
-            className="flex-1 relative"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}>
-            <div className="relative w-full aspect-auto max-w-2xl mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-2xl blur-xl"></div>
-              <div className="relative z-10 overflow-hidden rounded-2xl">
-                <img
-                  src="https://images.unsplash.com/photo-1600779547877-be592ef5aad3?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt="Artist performing"
-                  className="w-full h-full object-cover transform transition-all duration-300"
-                  style={{
-                    boxShadow: '0 0 25px 15px rgba(0, 0, 0, 0.15)',
-                    filter: 'blur(0.5px)',
-                    WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%)',
-                    maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%)',
-                  }}
-                  loading="lazy"
-                  width="800"
-                  height="600"
-                />
-              </div>
-            </div>
+            className="flex flex-wrap justify-center gap-4 sm:gap-6 px-2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.8 }}>
+            <button className="px-6 py-3 sm:px-8 sm:py-4 bg-pink-500 hover:bg-pink-600 text-white text-sm sm:text-base font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-pink-200 whitespace-nowrap">
+              Descubre Ácido Tropical
+            </button>
+            <button className="px-6 py-3 sm:px-8 sm:py-4 bg-white/90 hover:bg-white text-gray-800 text-sm sm:text-base border-2 border-gray-800 hover:border-pink-500 font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-pink-100 whitespace-nowrap">
+              Ver Sesiones en Vivo
+            </button>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 2 }}>
+        <svg
+          className="w-8 h-8 text-pink-500"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"
+          />
+        </svg>
+      </motion.div>
     </section>
   );
 };

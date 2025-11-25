@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
-import { Card, Button, Spinner } from "@heroui/react";
-import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
-import axios from "axios";
+import { Icon } from "@iconify/react";
+import { useState, useRef, useEffect } from "react";
 
 interface Show {
   id: string;
@@ -14,180 +12,412 @@ interface Show {
   ticketLink?: string;
   instagramLink?: string;
   name: string;
+  imageUrl?: string;
 }
 
+const sampleShows: Show[] = [
+  {
+    id: "1",
+    name: "Noche Tropical Vol. 6",
+    date: "2024-12-15",
+    time: "22:00",
+    venue: "Sala Razzmatazz",
+    city: "Barcelona",
+    country: "España",
+    ticketLink: "#",
+    instagramLink: "https://instagram.com/razzmatazzbcn",
+    imageUrl:
+      "https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+  },
+  {
+    id: "2",
+    name: "Sonidos del Caribe Festival",
+    date: "2024-11-20",
+    time: "21:30",
+    venue: "Sala Caracol",
+    city: "Madrid",
+    country: "España",
+    ticketLink: "#",
+    instagramLink: "https://instagram.com/salacaracol",
+    imageUrl:
+      "https://images.unsplash.com/photo-1461784180009-060310c220eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+  },
+  {
+    id: "3",
+    name: "Fiesta Latina Especial Verano",
+    date: "2024-12-12",
+    time: "23:00",
+    venue: "Playa de la Malvarrosa",
+    city: "Valencia",
+    country: "España",
+    ticketLink: "#",
+    instagramLink: "https://instagram.com/playamalvarrosa",
+    imageUrl:
+      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+  },
+  {
+    id: "4",
+    name: "Ritmo Caribeño Noche Blanca",
+    date: "2024-11-21",
+    time: "20:00",
+    venue: "Parque del Retiro",
+    city: "Madrid",
+    country: "España",
+    ticketLink: "#",
+    instagramLink: "https://instagram.com/parquedelretiro",
+    imageUrl:
+      "https://images.unsplash.com/photo-1505373876331-ff89ba064aaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+  },
+  {
+    id: "5",
+    name: "Sábado de Rumba",
+    date: "2024-11-23",
+    time: "19:30",
+    venue: "Sala Clamores",
+    city: "Madrid",
+    country: "España",
+    ticketLink: "#",
+    instagramLink: "https://instagram.com/salaclamores",
+    imageUrl:
+      "https://images.unsplash.com/photo-1540039155733-5bd30b56a234?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80",
+  },
+  {
+    id: "6",
+    name: "Gira Latinoamericana 2024",
+    date: "2024-12-15",
+    time: "21:00",
+    venue: "Teatro Colón",
+    city: "Buenos Aires",
+    country: "Argentina",
+    ticketLink: "#",
+    instagramLink: "https://instagram.com/teatrocolon",
+    imageUrl:
+      "https://images.unsplash.com/photo-1540039155733-5bd30b56a234?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80",
+  },
+  {
+    id: "7",
+    name: "Feria de Abril",
+    date: "2024-11-25",
+    time: "22:30",
+    venue: "Real de la Feria",
+    city: "Sevilla",
+    country: "España",
+    ticketLink: "#",
+    instagramLink: "https://instagram.com/feriadesevilla",
+    imageUrl:
+      "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+  },
+  {
+    id: "8",
+    name: "Festival Internacional de Música",
+    date: "2024-12-05",
+    time: "20:00",
+    venue: "Auditorio de Tenerife",
+    city: "Santa Cruz de Tenerife",
+    country: "España",
+    ticketLink: "#",
+    instagramLink: "https://instagram.com/auditoriodetenerife",
+    imageUrl:
+      "https://images.unsplash.com/photo-1540039155733-5bd30b56a234?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80",
+  },
+];
+
 export const Shows = () => {
-  const [shows, setShows] = useState<Show[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [selectedCity, setSelectedCity] = useState("all");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollContainer = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const fetchShows = async () => {
-      try {
-        console.log('Iniciando petición a la API...');
-        setIsLoading(true);
+  // Filter shows by city
+  const filteredShows =
+    selectedCity === "all"
+      ? sampleShows
+      : sampleShows.filter((show) => show.city === selectedCity);
 
-        const response = await axios.get(
-          'https://api.sheetbest.com/sheets/f46a27a4-9e01-427c-9987-1dcf5d9dc606',
-          {
-            headers: {
-              'Accept': 'application/json',
-              'X-Api-Key': import.meta.env.VITE_SHEETBEST_API_KEY || 'CWcmt%jcGvUI6D_ZYU!Q@uXX_r9do$4dHaO1qMAS!lTP@0MM$E8X973_pp3n8p!_',
-            },
-          }
-        );
+  // Sort shows by date
+  const sortedShows = [...filteredShows].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
 
-        console.log('Respuesta de la API:', response.data);
+  // Scroll functions
+  const scrollLeft = () => {
+    if (scrollContainer.current) {
+      scrollContainer.current.scrollBy({
+        left: -300,
+        behavior: "smooth",
+      });
+      setCurrentIndex((prev) => Math.max(0, prev - 1));
+    }
+  };
 
-        if (response.data && Array.isArray(response.data)) {
-          const formattedShows = response.data
-            .map((show: any, index: number) => ({
-              id: show.id?.toString() || index.toString(),
-              date: show.fecha || show.date || '',
-              time: show.hora || show.time || '',
-              venue: show.lugar || show.venue || '',
-              city: show.ciudad || show.city || '',
-              country: show.pais || show.country || '',
-              ticketLink: show.entradas || show.ticketLink || undefined,
-              instagramLink: show.instagram || show.instagramLink || undefined,
-              name: show.nombre || show.name || '',
-            }))
-            .filter((show: Show) => show.venue && show.date);
+  const scrollRight = () => {
+    if (scrollContainer.current) {
+      scrollContainer.current.scrollBy({
+        left: 300,
+        behavior: "smooth",
+      });
+      setCurrentIndex((prev) => Math.min(filteredShows.length - 1, prev + 1));
+    }
+  };
 
-          if (formattedShows.length === 0) {
-            throw new Error('No se encontraron shows válidos en los datos de la API.');
-          }
-
-          setShows(formattedShows);
-        } else {
-          throw new Error('Formato de respuesta inesperado de la API.');
-        }
-      } catch (err) {
-        console.error('Error al cargar los shows:', err);
-        setError('No se pudieron cargar los shows. Por favor, intenta de nuevo más tarde.');
-      } finally {
-        setIsLoading(false);
+  const scrollToIndex = (index: number) => {
+    if (scrollContainer.current) {
+      const container = scrollContainer.current;
+      const cards = container.querySelectorAll("[data-index]");
+      if (cards[index]) {
+        const card = cards[index] as HTMLElement;
+        container.scrollTo({
+          left: card.offsetLeft - 16,
+          behavior: "smooth",
+        });
+        setCurrentIndex(index);
       }
+    }
+  };
+
+  // Update current index on scroll
+  useEffect(() => {
+    const container = scrollContainer.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const containerWidth = container.offsetWidth;
+      const scrollPosition = container.scrollLeft + containerWidth / 2;
+      const cards = container.querySelectorAll("[data-index]");
+
+      cards.forEach((card, index) => {
+        const cardEl = card as HTMLElement;
+        const cardLeft = cardEl.offsetLeft;
+        const cardWidth = cardEl.offsetWidth;
+
+        if (
+          scrollPosition >= cardLeft &&
+          scrollPosition < cardLeft + cardWidth
+        ) {
+          setCurrentIndex(index);
+        }
+      });
     };
 
-    fetchShows();
-  }, []);
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    return () => container.removeEventListener("scroll", handleScroll);
+  }, [filteredShows]);
 
-  if (isLoading) {
-    return (
-      <section id="shows" className="py-20 bg-content1">
-        <div className="container mx-auto px-4 text-center">
-          <Spinner size="lg" />
-          <p className="mt-4">Cargando shows...</p>
-        </div>
-      </section>
-    );
-  }
+  // Format date
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    return new Date(dateString).toLocaleDateString("es-ES", options);
+  };
 
-  if (error) {
-    return (
-      <section id="shows" className="py-20 bg-content1">
-        <div className="container mx-auto px-4 text-center">
-          <div className="text-red-500 mb-4">
-            <Icon icon="mdi:alert-circle" className="text-4xl mx-auto" />
-          </div>
-          <p className="text-lg">{error}</p>
-          <Button
-            className="mt-4"
-            color="primary"
-            onClick={() => window.location.reload()}
-          >
-            Reintentar
-          </Button>
-        </div>
-      </section>
-    );
-  }
-
-  if (shows.length === 0) {
-    return (
-      <section id="shows" className="py-20 bg-content1">
-        <div className="container mx-auto px-4 text-center">
-          <Icon icon="mdi:calendar-remove" className="text-4xl text-gray-400 mx-auto mb-4" />
-          <h2 className="text-2xl font-semibold mb-2">No hay shows programados</h2>
-          <p className="text-gray-400">Vuelve pronto para ver nuestras próximas presentaciones.</p>
-        </div>
-      </section>
-    );
-  }
+  // Get unique cities for filter
+  const cities = Array.from(new Set(sampleShows.map((show) => show.city)));
 
   return (
-    <section id="shows" className="py-20 bg-content1">
+    <section
+      id="shows"
+      className="py-20 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Live Dates
+          <span className="inline-block px-4 py-1.5 bg-pink-100 text-pink-600 text-sm font-semibold rounded-full mb-4">
+            Próximos Eventos
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
+            Próximos{" "}
+            <span className="bg-gradient-to-r from-pink-500 to-blue-500 bg-clip-text text-transparent">
+              Shows
+            </span>
           </h2>
-          <p className="text-foreground-600 max-w-2xl mx-auto">
-          Feel the energy. Live the rhythm. Our fusion of rock, Caribbean vibes, and electronic beats is more than music — it’s an experience.
+          <div className="w-20 h-1 bg-gradient-to-r from-pink-400 to-blue-400 mx-auto mb-6 rounded-full"></div>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+            No te pierdas nuestras próximas presentaciones en vivo.
           </p>
+
+          {/* City filter */}
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
+            <button
+              className={`px-4 py-2 rounded-full text-sm font-medium ${
+                selectedCity === "all"
+                  ? "bg-pink-500 text-white"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              }`}
+              onClick={() => setSelectedCity("all")}>
+              Todas las ciudades
+            </button>
+            {cities.map((city) => (
+              <button
+                key={city}
+                className={`px-4 py-2 rounded-full text-sm font-medium ${
+                  selectedCity === city
+                    ? "bg-pink-500 text-white"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }`}
+                onClick={() => setSelectedCity(city)}>
+                {city}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="max-w-3xl mx-auto space-y-4">
-          {shows.map((show) => (
-            <motion.div
-              key={show.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Card className="p-6 hover:shadow-md transition-shadow">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div className="flex items-center gap-4">
-                    <div className="text-center border-r border-gray-700 pr-4">
-                      <div className="text-2xl font-bold text-primary">{show.date}</div>
-                      <div className="text-sm text-gray-400">{show.time}</div>
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-semibold">{show.name}</h3>
-                      <h3 className="text-md font-semibold">{show.venue}</h3>
-                      <p className="text-gray-400 flex items-center gap-1">
-                        <Icon icon="mdi:map-marker" className="text-sm" />
-                        {show.city}, {show.country}
-                      </p>
-                    </div>
-                  </div>
+        {sortedShows.length > 0 ? (
+          <div className="relative">
+            {/* Left navigation button */}
+            <button
+              onClick={scrollLeft}
+              className="hidden md:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 w-10 h-10 bg-white rounded-full shadow-lg z-10 hover:bg-gray-50 transition-colors"
+              aria-label="Desplazar izquierda">
+              <Icon
+                icon="mdi:chevron-left"
+                className="text-2xl text-gray-700"
+              />
+            </button>
 
-                  <div className="flex gap-2 mt-4 sm:mt-0 justify-end">
-                    {show.ticketLink && (
-                      <Button
-                        as="a"
-                        href={show.ticketLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        color="primary"
-                        size="sm"
-                        endContent={<Icon icon="lucide:ticket" />}
-                      >
-                        Entradas
-                      </Button>
-                    )}
-                    {show.instagramLink && (
-                      <Button
-                        as="a"
-                        href={show.instagramLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        color="default"
-                        variant="flat"
-                        size="sm"
-                        isIconOnly
-                        aria-label="Ver en Instagram"
-                      >
-                        <Icon icon="mdi:instagram" className="text-pink-500" />
-                      </Button>
-                    )}
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+            {/* Horizontal scroll container */}
+            <div
+              ref={scrollContainer}
+              className="flex overflow-x-auto pb-6 -mx-4 px-4 scrollbar-hide"
+              style={{
+                scrollBehavior: "smooth",
+                WebkitOverflowScrolling: "touch",
+                scrollSnapType: "x mandatory",
+                scrollPadding: "0 16px",
+              }}>
+              <div className="flex space-x-6 min-w-max">
+                {sortedShows.map((show, index) => (
+                  <motion.div
+                    key={show.id}
+                    data-index={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="w-80 flex-shrink-0 snap-center"
+                    style={{ scrollSnapAlign: "start" }}>
+                    <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+                      <div className="h-48 overflow-hidden">
+                        <img
+                          src={
+                            show.imageUrl ||
+                            `https://source.unsplash.com/random/600x400/?concert,${show.city}`
+                          }
+                          alt={`Show en ${show.venue}`}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                      <div className="p-6 flex flex-col flex-grow">
+                        <div className="flex-grow">
+                          <div className="flex justify-between items-start mb-4">
+                            <div>
+                              <h3 className="text-xl font-bold text-gray-900 mb-1">
+                                {show.name}
+                              </h3>
+                              <p className="text-gray-600">{show.venue}</p>
+                            </div>
+                            <div className="text-right">
+                              <div className="text-sm font-medium text-pink-500">
+                                {formatDate(show.date)}
+                              </div>
+                              <div className="text-sm text-gray-500">
+                                {show.time} h
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex items-center text-sm text-gray-500 mb-4">
+                            <Icon icon="mdi:map-marker" className="mr-1" />
+                            <span>
+                              {show.city}, {show.country}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="mt-auto">
+                          <div className="flex space-x-3">
+                            {show.ticketLink && (
+                              <a
+                                href={show.ticketLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-1 bg-gradient-to-r from-pink-500 to-blue-500 hover:from-pink-600 hover:to-blue-600 text-white text-center py-2 px-4 rounded-lg font-medium transition-all duration-300 hover:shadow-lg whitespace-nowrap">
+                                Comprar Entradas
+                              </a>
+                            )}
+                            {show.instagramLink && (
+                              <a
+                                href={show.instagramLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center w-12 h-12 rounded-lg bg-gray-100 hover:bg-gray-200 text-pink-500 transition-colors hover:scale-105 flex-shrink-0"
+                                aria-label="Ver en Instagram">
+                                <Icon
+                                  icon="mdi:instagram"
+                                  className="text-xl"
+                                />
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right navigation button */}
+            <button
+              onClick={scrollRight}
+              className="hidden md:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 w-10 h-10 bg-white rounded-full shadow-lg z-10 hover:bg-gray-50 transition-colors"
+              aria-label="Desplazar derecha">
+              <Icon
+                icon="mdi:chevron-right"
+                className="text-2xl text-gray-700"
+              />
+            </button>
+
+            {/* Mobile navigation dots */}
+            <div className="flex justify-center mt-6 space-x-2 md:hidden">
+              {sortedShows.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => scrollToIndex(i)}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    currentIndex === i ? "bg-pink-500" : "bg-gray-300"
+                  }`}
+                  aria-label={`Ir al show ${i + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="text-center py-16 bg-white rounded-2xl shadow-inner">
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-pink-50 rounded-full mb-6">
+              <Icon
+                icon="mdi:calendar-edit"
+                className="text-pink-500 text-4xl"
+              />
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-3">
+              {selectedCity === "all"
+                ? "¡Próximamente más fechas!"
+                : `No hay eventos próximos en ${selectedCity}`}
+            </h3>
+            <p className="text-gray-600 max-w-md mx-auto mb-6">
+              {selectedCity === "all"
+                ? "Estamos preparando nuevos shows increíbles. Mantente atento a nuestras redes sociales para no perderte nada."
+                : "Prueba a buscar en otras ciudades o vuelve más tarde para ver nuevas fechas."}
+            </p>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-2 border border-transparent text-base font-medium rounded-full text-pink-600 bg-pink-50 hover:bg-pink-100 transition-colors">
+              <Icon icon="mdi:instagram" className="mr-2" />
+              Seguir en Instagram
+            </a>
+          </div>
+        )}
       </div>
     </section>
   );
