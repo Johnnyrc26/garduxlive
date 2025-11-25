@@ -59,7 +59,7 @@ export const Hero = () => {
             <span className="font-semibold text-pink-600">Ácido Tropical</span>,
             hasta tours entre Latinoamérica y Europa, pasando por grabaciones en
             escenarios naturales y{" "}
-            <span className="font-semibold text-teal-600">Voltafon</span>, la
+            <span className="font-semibold text-teal-600">Voltafunk</span>, la
             fiesta sobre ruedas que hace vibrar Valencia.
           </motion.p>
 
